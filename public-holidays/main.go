@@ -39,13 +39,12 @@ func main() {
 		Message: "Choose a country:",
 		Options: countryOptions,
 	}
+
 	var selectedIndex int
 	survey.AskOne(prompt, &selectedIndex)
-
 	selectedCountry := countries[selectedIndex]
-	fmt.Printf("You selected: %s (%s)\n", selectedCountry.Name, selectedCountry.CountryCode)
-
 	year := time.Now().Year()
+
 	var holidays []Holiday
 	if err := fetchData(fmt.Sprintf("%s/%d/%s", HOLIDAYS_URL, year, selectedCountry.CountryCode), &holidays); err != nil {
 		fmt.Println("Error fetching public holidays:", err)
